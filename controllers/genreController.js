@@ -3,14 +3,13 @@ const {catchAsync} = require('./errorController')
 
 
 exports.getGenreList =  catchAsync (async (req,res,next)=>{ 
-    const genreList = await Genre.find({})
+    const genreList = await Genre.find({}).sort({genre:1})
     res.status(200).json({
         status: "Success",
         data: genreList
     })
 
 })
-
 
 exports.createGenre = catchAsync (async (req,res,next)=>{
     const {genre} = req.body

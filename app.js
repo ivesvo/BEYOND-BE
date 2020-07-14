@@ -9,7 +9,7 @@ var logger = require('morgan');
 var usersRouter = require('./routes/users');
 var genresRouter = require('./routes/genres')
 // var eventsRouter = require('./routes/event')
-// var artistsRouter = require('./routes/artist')
+var artistsRouter = require('./routes/artist')
 var errorRouter = require('./routes/error')
 
 var app = express();
@@ -42,7 +42,7 @@ mongoose.connect(process.env.DB, {
 app.use('/users', usersRouter);
 app.use('/genres',genresRouter);
 // app.use('/events', eventsRouter);
-// app.use('/artists', artistsRouter);
+app.use('/artists', artistsRouter);
 app.use(errorRouter)
 
 //errror Handler

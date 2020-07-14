@@ -1,3 +1,5 @@
+const AppError = require('../utils/appError')
+
 exports.notFound = (req, res, next) => {
     res.status(404).json({
         status: 'fail',
@@ -7,7 +9,7 @@ exports.notFound = (req, res, next) => {
 }
 
 exports.catchAsync = (func) => {
-    console.log("hello this is error")
+    // console.log("hello this is error")
     return (req, res, next) => func(req, res, next).catch(next)
 }
 
