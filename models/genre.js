@@ -9,6 +9,9 @@ const genreSchema = new mongoose.Schema({
         unique: true,
         trim: true,
 
+    },
+    description:{
+        type: String,
     }
 })
 

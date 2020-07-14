@@ -12,9 +12,10 @@ exports.getGenreList =  catchAsync (async (req,res,next)=>{
 })
 
 exports.createGenre = catchAsync (async (req,res,next)=>{
-    const {genre} = req.body
+    const {genre, description} = req.body
     const newgenre = await Genre.create({
-        genre: genre
+        genre: genre,
+        description: description,
     })
     res.status(201).json({
         status: "Success",
@@ -23,9 +24,10 @@ exports.createGenre = catchAsync (async (req,res,next)=>{
 })
 
 exports.updateGenre = catchAsync (async (req,res,next)=>{
-    const {genre} = req.body
+    const {genre, description} = req.body
     const editgenre = await Genre.findByIdAndUpdate(req.params.gid, {
-        genre: genre
+        genre: genre,
+        description: description
      })
      res.status(200).json({
          status: "Successfully Editing Your Genre",
