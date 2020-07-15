@@ -5,8 +5,8 @@ const AppError = require('../utils/appError')
 
 
 exports.getArtistList = catchAsync(async (req, res, next) => {
-    const artistList = await Artist.find({}).populate('genres',"genre")
-
+    const artistList = await Artist.find({}).populate({path:"genres", select:"genre"})
+    console.log(artistList)
     res.status(200).json({
         status: "Success",
         data: artistList
