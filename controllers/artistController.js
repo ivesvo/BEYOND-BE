@@ -60,7 +60,7 @@ exports.deleteArtist = catchAsync(async (req, res, next) => {
 exports.getArtistByTitle = catchAsync(async(req,res,next)=>{
     console.log("helolo")
     const title = req.params.title
-    const artist = await Artist.findOne({title:title})
+    const artist = await Artist.findOne({title:title}).populate({path:"genres", select:"genre"})
     if (!artist){
         throw new AppError(500, "No Data")}
     res.status(200).json({
