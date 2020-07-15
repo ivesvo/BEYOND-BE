@@ -9,10 +9,13 @@ const artistSchema = new mongoose.Schema({
         unique: true,
         trim: true,
     },
-    genres: [{
-        type: String,
+    genres: [
+        {
+        type: mongoose.Schema.ObjectId,
+        ref: "Genre",
         required: [true, "genre is required"],
-    }],
+    }
+],
     biography: {
         type: String,
         required: true,
