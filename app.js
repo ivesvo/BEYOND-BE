@@ -5,12 +5,15 @@ dotenv.config();
 
 var logger = require('morgan');
 
-// var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var genresRouter = require('./routes/genres')
-// var eventsRouter = require('./routes/event')
+var eventsRouter = require('./routes/event')
 var artistsRouter = require('./routes/artist')
 var errorRouter = require('./routes/error')
+var authRouter = require('./routes/auth')
+var cityRouter = require('./routes/city')
+var ticketRouter = require('./routes/ticket')
+var cartRouter = require('./routes/cart')
 
 var app = express();
 
@@ -41,8 +44,12 @@ mongoose.connect(process.env.DB, {
 // app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/genres',genresRouter);
-// app.use('/events', eventsRouter);
+app.use('/auth', authRouter);
+app.use('/events', eventsRouter);
 app.use('/artists', artistsRouter);
+app.use('/city', cityRouter)
+app.use('/tickets', ticketRouter)
+app.use('/cart', cartRouter)
 app.use(errorRouter)
 
 //errror Handler

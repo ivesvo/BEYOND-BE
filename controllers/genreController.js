@@ -1,4 +1,5 @@
 const Genre = require('../models/genre')
+const Artist = require('../models/artist')
 const {catchAsync} = require('./errorController')
 
 
@@ -12,10 +13,11 @@ exports.getGenreList =  catchAsync (async (req,res,next)=>{
 })
 
 exports.createGenre = catchAsync (async (req,res,next)=>{
-    const {genre, description} = req.body
+    const {genre, description, code} = req.body
     const newgenre = await Genre.create({
         genre: genre,
         description: description,
+        code: code
     })
     res.status(201).json({
         status: "Success",
@@ -24,10 +26,11 @@ exports.createGenre = catchAsync (async (req,res,next)=>{
 })
 
 exports.updateGenre = catchAsync (async (req,res,next)=>{
-    const {genre, description} = req.body
+    const {genre, description, code} = req.body
     const editgenre = await Genre.findByIdAndUpdate(req.params.gid, {
         genre: genre,
-        description: description
+        description: description,
+        code: code
      })
      res.status(200).json({
          status: "Successfully Editing Your Genre",
@@ -44,3 +47,4 @@ exports.deleteGenre = catchAsync (async (req,res,next)=>{
     })
 
 })
+

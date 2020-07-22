@@ -6,7 +6,10 @@
 
 var app = require('../app');
 var debug = require('debug')('beyond-be:server');
-var http = require('http');
+var http = require('http')
+// var https = require('https')
+const fs = require("fs");
+const path = require("path");
 
 /**
  * Get port from environment and store in Express.
@@ -15,11 +18,23 @@ var http = require('http');
 var port = normalizePort(process.env.PORT || 5000 );
 app.set('port', port);
 
+
+
+// const server = https.createServer(
+//   {
+//     key: fs.readFileSync(path.join(__dirname, "server.key")),
+//     cert: fs.readFileSync(path.join(__dirname, "server.cert"))
+//   },
+//   app
+// );
+
+const server = http.createServer(app)
+
 /**
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+
 
 /**
  * Listen on provided port, on all network interfaces.

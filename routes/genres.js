@@ -6,7 +6,7 @@ const {getGenreList, createGenre, updateGenre, deleteGenre} = require ('../contr
 router.route('/')
     .post(createGenre)
     .get(getGenreList)
-    
+
 
 router.route('/:gid')
     // .get(findExpsbyTags)

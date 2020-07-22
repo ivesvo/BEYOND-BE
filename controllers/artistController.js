@@ -5,7 +5,7 @@ const AppError = require('../utils/appError')
 
 
 exports.getArtistList = catchAsync(async (req, res, next) => {
-    const artistList = await Artist.find({}).populate({path:"genres", select:"genre"})
+    const artistList = await Artist.find({}).populate({ path: "genres", select: "genre" })
     console.log(artistList)
     res.status(200).json({
         status: "Success",
@@ -14,9 +14,8 @@ exports.getArtistList = catchAsync(async (req, res, next) => {
 
 })
 
-
 exports.createArtist = catchAsync(async (req, res, next) => {
-    const { title, biography, pictureURL, city, genres } = req.body
+    const { title, biography, pictureURL, city, genres} = req.body
     if (!title || !genres || !biography) {
         next(new AppError, 401, "Please provide all the data required to create an artist")
     }
@@ -27,7 +26,7 @@ exports.createArtist = catchAsync(async (req, res, next) => {
         biography: biography,
         genres: newArr,
         pictureURL: pictureURL,
-        city: city
+        city: city,
     })
     // await newartist.populate({path:"genre", select:"genre"}).execPopulate()
     res.status(201).json({
@@ -57,14 +56,29 @@ exports.deleteArtist = catchAsync(async (req, res, next) => {
 
 })
 
-exports.getArtistByTitle = catchAsync(async(req,res,next)=>{
-    console.log("helolo")
+exports.getArtistByTitle = catchAsync(async (req, res, next) => {
     const title = req.params.title
-    const artist = await Artist.findOne({title:title}).populate({path:"genres", select:"genre"})
-    if (!artist){
-        throw new AppError(500, "No Data")}
+    const artist = await Artist.findOne({ title: title }).populate({ path: "genres", select: "genre" })
+    if (!artist) {
+        throw new AppError(500, "No Data")
+    }
     res.status(200).json({
         status: "Sucess",
+        data: artist
+    })
+})
+
+exports.findArtistByGenre = catchAsync(async (req, res, next) => {
+    const code = req.params.code
+    // console.log(genre)
+    const genreToFind = await Genre.findOne({code:code})
+    const artist = await Artist.find({genres:genreToFind})
+    console.log(artist)
+    if (!artist) {
+        throw new AppError(500, "No Data")
+    }
+    res.status(200).json({
+        status: "Success",
         data: artist
     })
 })
