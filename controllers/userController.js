@@ -11,7 +11,7 @@ exports.createUser = async (req, res) => {
                 error: "email, password and name of user is required"
             });
         }
-        const user = await User.create({ email: email, password: password, name: name, role: role || "normal" })
+        const user = await User.create({ email: email, password: password, name: name })
         res.status(201).json({ status: "OK", data: user})
     }
     catch (err) {
