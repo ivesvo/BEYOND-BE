@@ -1,5 +1,6 @@
 var express = require('express');
-const { loginWithEmail, logout, loginFacebook, facebookAuthHandler } = require('../controllers/authController');
+const { loginWithEmail, logout, loginFacebook } = require('../controllers/authController');
+
 const { loginRequired } = require('../middleware/auth');
 
 var router = express.Router();
@@ -11,6 +12,7 @@ router.route("/login/facebook")
 
 router.route("/login")
 .post(loginWithEmail)
+
 
 router.route('/logout')
 .post(loginRequired, logout)
