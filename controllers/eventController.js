@@ -69,7 +69,6 @@ exports.createEvent = catchAsync(async (req, res, next) => {
             city: cityObj
         })
         console.log("YO")
-    // await exp.populate({path:"host", select:"name"}).execPopulate()
     res.status(201).json({ status: "OK", data: event })
 
 
@@ -79,7 +78,8 @@ exports.updateEvent = async (req, res, next) => {
     try {
         const user = req.user
         const { title, description, date, startTime, endTime, venue, address, lineup, minimumAge, posterURL, price, availableTicket, city } = req.body
-        const cityObj = await City.findOne({code:city}).populate({ path: "city", select: "city"})
+        console.log(req.body)
+        const cityObj = await City.findOne({code:city})
         const updatedevent = await Event.findByIdAndUpdate(req.params.eid, {
             title: title,
             description: description,
@@ -101,6 +101,7 @@ exports.updateEvent = async (req, res, next) => {
         if (user.role != "admin") {
             return next(new AppError(401, "You cannot"))
         }
+        await updatedevent.save()
         res.status(200).json({
             status: "Successfully Editing Your Event",
             data: updatedevent

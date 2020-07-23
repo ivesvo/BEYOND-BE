@@ -30,7 +30,7 @@ const eventSchema = new mongoose.Schema({
         type: String,
     },
     address:{
-        type: String
+        type: String,
     },
     lineup:[{
         type: String,

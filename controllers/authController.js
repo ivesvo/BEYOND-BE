@@ -14,6 +14,7 @@ exports.loginWithEmail = async (req, res, next) => {
         return res.status(401).json({ status: "fail", error: "Wrong email or password" })
     }
     const token = await user.generateToken();
+
     res.json({ status: "OK", data: { user: user, token: token } })
 }
 
