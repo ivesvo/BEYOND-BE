@@ -18,7 +18,7 @@ exports.getEventList = catchAsync(async (req, res, next) => {
         
     const pageNum = req.query.page || 1
     const numToSkip = (parseInt(pageNum)-1)*PAGE_SIZE
-    const eventList = await q.sort({ createdAt: -1 }).populate({ path: "city", select: "city, code"})
+    const eventList = await q.sort({ date: 1 }).populate({ path: "city", select: "city, code"})
     .limit(PAGE_SIZE).skip(numToSkip);
     const numDocuments = await Event.countDocuments();
     console.log(eventList.length)

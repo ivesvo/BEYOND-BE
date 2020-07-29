@@ -15,7 +15,7 @@ exports.getArtistList = catchAsync(async (req, res, next) => {
 })
 
 exports.createArtist = catchAsync(async (req, res, next) => {
-    const { title, biography, pictureURL, city, genres} = req.body
+    const { title, biography, pictureURL, city, genres, instagramURL, facebookURL, soundcloudURL} = req.body
     if (!title || !genres || !biography) {
         next(new AppError, 401, "Please provide all the data required to create an artist")
     }
@@ -27,6 +27,9 @@ exports.createArtist = catchAsync(async (req, res, next) => {
         genres: newArr,
         pictureURL: pictureURL,
         city: city,
+        instagramURL: instagramURL,
+        facebookURL:facebookURL,
+        soundcloudURL: soundcloudURL 
     })
     // await newartist.populate({path:"genre", select:"genre"}).execPopulate()
     res.status(201).json({
